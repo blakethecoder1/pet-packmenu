@@ -1,0 +1,73 @@
+================================================================================
+OFF-GRID MENU - QUICK INSTALLATION GUIDE
+================================================================================
+
+STEP 1: Install NativeUI
+-------------------------
+Download NativeUI from: https://github.com/FrazzIe/NativeUILua_Reloaded
+Place it in your resources folder.
+
+STEP 2: Install Off-Grid Menu
+------------------------------
+Place this folder (pet-Packmenu or renamed to offgrid-menu) in your resources folder.
+
+STEP 3: Update server.cfg
+--------------------------
+Add these lines:
+
+    ensure NativeUI
+    ensure offgrid-menu
+
+STEP 4: Configure Permissions (permissions.cfg or vMenu config)
+----------------------------------------------------------------
+Add these ACE permissions for your packs:
+
+    # Truck Pack
+    add_ace group.truck "off-grid.truck" allow
+    
+    # Offroad Pack
+    add_ace group.offroad "off-grid.offroad" allow
+    
+    # Donator Pack
+    add_ace group.donator "off-grid.donator" allow
+    
+    # LEO Pack
+    add_ace group.leo "off-grid.leo" allow
+
+STEP 5: Assign Players to Groups
+---------------------------------
+Example for assigning a player to the truck pack:
+
+    add_principal identifier.steam:110000XXXXXXXX group.truck
+
+Or give permission directly:
+
+    add_ace identifier.steam:110000XXXXXXXX "off-grid.truck" allow
+
+STEP 6: Update Vehicle Models
+------------------------------
+Edit config.lua and replace the example vehicle models with your actual 
+server's vehicle spawn codes.
+
+STEP 7: Start Server
+--------------------
+Restart your server or run: /restart offgrid-menu
+
+STEP 8: Test
+------------
+Press M in-game to open the menu!
+
+================================================================================
+QUICK REFERENCE
+================================================================================
+
+Menu Key: M
+Permission Format: off-grid.[packname]
+Available Packs: truck, offroad, donator, leo
+
+To add a new pack:
+1. Edit config.lua - add pack to Config.Packs
+2. Add ACE permission in permissions.cfg
+3. Menu automatically updates!
+
+================================================================================

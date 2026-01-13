@@ -1,0 +1,187 @@
+================================================================================
+OFF-GRID MENU - DISCORD ROLE SETUP GUIDE
+================================================================================
+
+This menu now uses Discord roles for permissions instead of ACE permissions!
+
+================================================================================
+STEP 1: INSTALL DISCORD API RESOURCE
+================================================================================
+
+Choose ONE of these Discord API resources:
+
+Option A: badger_discord_api (RECOMMENDED)
+   - Download: https://github.com/JaredScar/Badger_Discord_API
+   - Place in resources folder
+   - Add to server.cfg: ensure badger_discord_api
+
+Option B: discord-roles
+   - Search FiveM forums for "discord-roles"
+   - Follow installation instructions
+
+Option C: discord_perms
+   - Search FiveM forums for "discord_perms"
+   - Follow installation instructions
+
+================================================================================
+STEP 2: GET YOUR DISCORD ROLE IDS
+================================================================================
+
+1. Enable Developer Mode in Discord:
+   - Open Discord
+   - User Settings (gear icon) > Advanced
+   - Toggle ON "Developer Mode"
+
+2. Get Role IDs from your Discord Server:
+   - Go to Server Settings > Roles
+   - Right-click on any role
+   - Click "Copy ID"
+   - Save this ID for the next step
+
+Example Discord Roles you might create:
+   - "Truck Pack" role
+   - "Offroad Pack" role
+   - "Donator" role
+   - "LEO" role
+
+================================================================================
+STEP 3: CONFIGURE THE MENU
+================================================================================
+
+1. Open config.lua in pet-Packmenu folder
+
+2. Set Discord mode to enabled:
+   Config.UseDiscordRoles = true
+
+3. For EACH pack, replace the discordRole with your actual Discord role ID:
+
+   BEFORE:
+   truck = {
+       name = "Truck Pack",
+       discordRole = "1234567890123456789",  -- Default placeholder
+       ...
+   }
+
+   AFTER:
+   truck = {
+       name = "Truck Pack",
+       discordRole = "987654321098765432",  -- Your actual Discord role ID
+       ...
+   }
+
+4. Repeat for all packs: truck, offroad, donator, leo
+
+================================================================================
+STEP 4: UPDATE SERVER.CFG
+================================================================================
+
+Add these lines to your server.cfg:
+
+   ensure badger_discord_api  # Or your chosen Discord API
+   ensure pet-Packmenu
+
+Make sure Discord API starts BEFORE pet-Packmenu!
+
+================================================================================
+STEP 5: ASSIGN DISCORD ROLES TO USERS
+================================================================================
+
+In your Discord server:
+
+1. Right-click on a user's name
+2. Select "Roles"
+3. Check the role you want to give them (e.g., "Truck Pack")
+4. User will automatically get access when they join FiveM
+
+NO MORE ACE PERMISSIONS NEEDED! It's all Discord now!
+
+================================================================================
+STEP 6: TEST THE MENU
+================================================================================
+
+1. Restart your FiveM server
+2. Join the server with a user who has a Discord role
+3. Press M to open the menu
+4. You should see the packs you have Discord roles for
+
+================================================================================
+HOW TO GET YOUR DISCORD SERVER ID (if needed)
+================================================================================
+
+1. In Discord, right-click your server icon
+2. Click "Copy ID"
+3. Paste into Config.DiscordGuildId in config.lua
+
+================================================================================
+EXAMPLE CONFIGURATION
+================================================================================
+
+Config.UseDiscordRoles = true
+Config.DiscordGuildId = "123456789012345678"
+
+Config.Packs = {
+    truck = {
+        name = "Truck Pack",
+        discordRole = "111111111111111111",  -- Copy from your Discord Truck role
+        description = "Unlock heavy-duty trucks",
+        vehicles = {...}
+    },
+    
+    donator = {
+        name = "Donator Pack",
+        discordRole = "222222222222222222",  -- Copy from your Discord Donator role
+        description = "Exclusive vehicles",
+        vehicles = {...}
+    },
+    
+    leo = {
+        name = "LEO Pack",
+        discordRole = "333333333333333333",  -- Copy from your Discord LEO role
+        description = "Law enforcement tools",
+        vehicles = {...}
+    }
+}
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Menu shows but no packs available:
+   - Check Discord role IDs are correct (18-19 digits)
+   - Verify user has the role in Discord
+   - Check server console for "[Off-Grid Menu]" logs
+   - Make sure Discord API is running (check with "status" in server console)
+
+"No Discord API found" error:
+   - Ensure badger_discord_api or equivalent is installed
+   - Make sure it starts BEFORE pet-Packmenu
+   - Check server console for Discord API startup messages
+
+User has role but no access:
+   - User must disconnect and reconnect after getting Discord role
+   - Check that role ID exactly matches (right-click role > Copy ID)
+   - Use /offgrid:debug command in-game to check permissions
+
+================================================================================
+SWITCHING BACK TO ACE PERMISSIONS
+================================================================================
+
+If you want to disable Discord and use ACE permissions instead:
+
+1. Open config.lua
+2. Set: Config.UseDiscordRoles = false
+3. Use ACE permissions in server.cfg like before
+4. Restart resource
+
+================================================================================
+BENEFITS OF DISCORD ROLES
+================================================================================
+
+✓ No need to edit server.cfg for each player
+✓ Assign roles directly in Discord
+✓ Instant role changes (after reconnect)
+✓ Easy to manage through Discord
+✓ Perfect for donation packs
+✓ Works with Tebex/store integrations
+
+================================================================================
